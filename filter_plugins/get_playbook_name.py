@@ -4,18 +4,8 @@ __metaclass__ = type
 import re
 
 
-# pattern_filter = '[a-zA-Z0-9_-]*[.][a-z]*'
-#
-# message = "/usr/local/bin/python /usr/local/bin/ansible-playbook get-playbook-name.yml"
-#
-# def run(message):
-#     find = re.search(pattern_filter, message)
-#     return find.group()
-#
-# run(message)
-
 def run(message):
-    pattern_filter = '[a-zA-Z0-9_-]*[.][a-z]*'
+    pattern_filter = '[a-zA-Z0-9_-]*[.]ya?ml'
     find = re.search(pattern_filter, message)
 
     return find.group()

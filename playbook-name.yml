@@ -1,13 +1,13 @@
 ---
-  - name: test playbook
-    hosts: "{{ target | default('localhost') }}"
-    vars:
-      playbook_path: "{{ (lookup('file', '/proc/self/cmdline', errors='warn') | regex_replace('\u0000',' ')) }}"
+- name: test playbook
+  hosts: "{{ target | default('localhost') }}"
+  vars:
+    playbook_path: "{{ (lookup('file', '/proc/self/cmdline', errors='warn') | regex_replace('\u0000',' ')) }}"
 
-    tasks:
-    - name: debug playbook_path
-      debug:
-        msg: "{{ playbook_path }}"
-    - name: debug test plugin
-      debug:
-        msg: "{{ playbook_path | get_playbook_name }}"
+  tasks:
+  - name: debug playbook_path
+    debug:
+      msg: "{{ playbook_path }}"
+  - name: debug test plugin
+    debug:
+      msg: "{{ playbook_path | get_playbook_name }}"
