@@ -1,0 +1,11 @@
+---
+- name: test playbook [lookup plugin]
+  hosts: "{{ target | default('localhost') }}"
+
+  tasks:
+  - name: set_fact playbook_name using get_playbook_name plugin
+    set_fact:
+      playbook_name: "{{ None | get_playbook_name }}"
+  - name: debug playbook_name
+    debug:
+      msg: "{{ playbook_name }}"
