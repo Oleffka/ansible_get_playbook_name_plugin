@@ -1,13 +1,14 @@
 ---
-- name: test playbook
+- name: test playbook (basic linux example)
   hosts: "{{ target | default('localhost') }}"
   vars:
-    playbook_path: "{{ (lookup('file', '/proc/self/cmdline', errors='warn') | regex_replace('\u0000',' ')) }}"
+    playbook_path: "{{ (lookup('file', '/proc/self/cmdline', errors='warn') | regex_replace('\u0000', ' ')).split() }}"
+    pattern: '[a-zA-Z0-9_-]*[.]ya?ml'
 
   tasks:
-  - name: debug playbook_path
+  - name: set_fact playbook_name
+    set_fact:
+      playbook_name: "{{ playbook_path | map('regex_search', pattern) | select('string') | list }}"
+  - name: debug playbook_name
     debug:
-      msg: "{{ playbook_path }}"
-  - name: debug test plugin
-    debug:
-      msg: "{{ playbook_path | get_playbook_name }}"
+      msg: "{{ playbook_name }}"
