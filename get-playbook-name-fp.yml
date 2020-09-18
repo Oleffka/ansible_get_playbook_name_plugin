@@ -3,9 +3,9 @@
   hosts: "{{ target | default('localhost') }}"
 
   tasks:
-  - name: set_fact playbook_name using get_playbook_name lookup_plugin
+  - name: set_fact playbook_name using get_playbook_name filter_plugin
     set_fact:
-      playbook_name: "{{ lookup('get_playbook_name') }}"
+      playbook_name: "{{ None | get_playbook_name }}"
   - name: debug playbook_name
     debug:
       msg: "{{ playbook_name }}"
